@@ -1,0 +1,30 @@
+USE [AssignRef]
+GO
+/****** Object:  StoredProcedure [dbo].[Venue_Delete_ById]    Script Date: 6/22/2023 12:03:36 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER Proc [dbo].[Venue_Delete_ById]
+		@Id int
+AS
+
+/* TEST CODE
+
+
+		Declare		
+		@Id int = 19
+		execute dbo.Venue_Delete_ById @Id
+*/
+BEGIN
+
+		delete from dbo.Games
+		where VenueId = @Id
+
+		Delete from dbo.Venues
+		Where Id = @Id
+
+
+END
