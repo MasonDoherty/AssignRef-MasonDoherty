@@ -1,0 +1,43 @@
+//just snippet from large file
+
+const AddVenue = lazy(() => import("../components/venue/AddNewVenue"));
+const Venue = lazy(() => import("../components/venue/Venue"));
+
+const venues = [
+  {
+    path: "/venues",
+    name: "Venues",
+    exact: true,
+    element: Venue,
+    roles: [
+      "Admin",
+      "Official",
+      "Game Day Personnel",
+      "Team Personnel",
+      "Supervisor",
+    ],
+    isAnonymous: false,
+  },
+  {
+    path: "/venues/new",
+    name: "New Venue",
+    exact: true,
+    element: AddVenue,
+    roles: [
+      "Admin",
+      "Official",
+      "Game Day Personnel",
+      "Team Personnel",
+      "Supervisor",
+    ],
+    isAnonymous: false,
+  },
+]
+
+const allRoutes = [
+
+  ...venues,
+ 
+];
+
+export default allRoutes;
