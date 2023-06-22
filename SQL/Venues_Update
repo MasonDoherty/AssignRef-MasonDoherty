@@ -1,0 +1,61 @@
+USE [AssignRef]
+GO
+/****** Object:  StoredProcedure [dbo].[Venues_Update]    Script Date: 6/22/2023 12:02:59 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER proc [dbo].[Venues_Update]
+			
+			@Name nvarchar(255),
+			@Description nvarchar(4000),
+			@LocationId int,
+			@Url nvarchar(255),
+			@PrimaryImageUrl nvarchar(255),
+			@ModifiedBy int,
+			@Id int
+AS
+/* TEST CODE BELOW
+
+
+	Declare			@Name nvarchar(255)= 'delete this one'
+					,@Description nvarchar(4000)='Enter  Updated Description here'
+					,@LocationId int= 4
+					,@Url nvarchar(255) = ' UPDATED URL ENTERED HERE'
+					,@PrimaryImageUrl nvarchar(255)='UPATED Primary Image URL goes here'
+					,@ModifiedBy int = 6
+					,@Id int = 20
+
+
+
+	Execute Dbo.Venues_Update
+
+					@Name
+					,@Description
+					,@LocationId
+					,@Url
+					,@PrimaryImageUrl
+					,@ModifiedBy
+					,@Id 
+
+
+*/
+BEGIN
+		UPDATE	 DBO.Venues
+			Set		Name =@Name
+					,Description =@Description
+					,LocationId =@LocationId
+					,Url =@Url
+					,PrimaryImageUrl=  @PrimaryImageUrl
+					,DateModified = GETUTCDATE()
+
+
+
+					WHERE Id = @Id
+
+
+
+
+END
