@@ -1,0 +1,83 @@
+USE [AssignRef]
+GO
+/****** Object:  StoredProcedure [dbo].[Venues_Search]    Script Date: 6/22/2023 12:04:03 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER proc [dbo].[Venues_Search]
+			
+			@PageIndex int
+			,@PageSize int
+			,@Query nvarchar(50)
+
+AS
+
+
+/*     TEST CODE
+
+	Declare			@PageIndex int = 0
+					,@PageSize int = 3
+					,@Query nvarchar(50) = 'brand'
+
+	EXECUTE dbo.Venues_Search
+					
+					@PageIndex
+					,@PageSize
+					,@Query
+*/
+BEGIN
+		Declare @Offset int = @PageIndex * @PageSize
+
+Select			v.Id
+				,v.Name
+				,l.Id
+				,l.LineOne
+				,l.LineTwo
+				,l.City as LocationCity
+				,s.Id as StateId
+				,s.Code as StateCode
+				,s.Name as StateName
+				,l.Zip
+				,l.Latitude
+				,l.Longitude	
+				,lt.Id
+				,lt.Name
+				,v.PrimaryImageUrl
+				,v.Description
+				,v.Url
+				,u.Id
+				,u.FirstName
+				,u.LastName
+				,u.Mi
+				,u.AvatarUrl
+				,u.Id
+				,u.FirstName
+				,u.LastName
+				,u.Mi
+				,u.AvatarUrl
+				,v.DateCreated
+				,v.DateModified
+				,TotalCount = COUNT(1) OVER()
+				
+
+			from dbo.Venues as v
+			inner join dbo.Locations as l
+			on v.LocationId = l.Id
+			inner join dbo.States as s
+			on l.StateId = s.Id
+			inner join dbo.LocationTypes as lt
+			on l.LocationTypeId = lt.Id
+			inner join dbo.Users as u
+			on v.CreatedBy = u.id
+
+
+			Where v.Name LIKE '%' + @Query + '%' or v.Description LIKE '%' + @Query + '%' 
+			order by v.id
+			Offset @Offset Rows
+			Fetch Next @PageSize Rows Only 
+
+
+END
