@@ -1,0 +1,20 @@
+.largemodalwindow {
+  width: 850px;
+}
+.map-container {
+  height: 100%;
+  width: 100%;
+}
+.mapholder {
+  height: 375px;
+  width: 375px;
+  margin: 10px;
+}
+.centermap {
+  align-items: center;
+}
+
+.imageheader {
+  max-width: 500px;
+  max-height: 500px;
+}
