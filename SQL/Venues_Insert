@@ -1,0 +1,68 @@
+USE [AssignRef]
+GO
+/****** Object:  StoredProcedure [dbo].[Venues_Insert]    Script Date: 6/22/2023 12:02:09 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER proc [dbo].[Venues_Insert]
+			@Name nvarchar(255),
+			@Description nvarchar(4000),
+			@LocationId int,
+			@Url nvarchar(255),
+			@PrimaryImageUrl nvarchar(255),
+			@CreatedBy int,
+			@ModifiedBy int,
+			@Id int OUTPUT
+AS
+/* TEST CODE BELOW
+
+		Declare		@Id int = 0;
+
+		Declare		@Name nvarchar(255)= ' Brand New Venue'
+					,@Description nvarchar(4000)='New One'
+					,@LocationId int= 4
+					,@Url nvarchar(255) = 'URL ENTERED HERE'
+					,@PrimaryImageUrl nvarchar(255)=' Primary Image URL goes here'
+					,@CreatedBy int=6
+					,@ModifiedBy int=6
+
+
+		Execute dbo.Venues_Insert
+					
+					@Name
+					,@Description
+					,@LocationId
+					,@Url
+					,@PrimaryImageUrl
+					,@CreatedBy
+					,@ModifiedBy
+					,@Id OUTPUT
+
+*/
+BEGIN
+		INSERT INTO DBO.Venues
+			([Name]
+			,[Description]
+			,[LocationId]
+			,[Url]
+			,[PrimaryImageUrL]
+			,[CreatedBy]
+			,[ModifiedBy]
+			)
+		Values
+			(@Name
+			,@Description 
+			,@LocationId
+			,@Url
+			,@PrimaryImageUrL
+			,@CreatedBy
+			,@ModifiedBy
+			)
+			
+			set @Id = SCOPE_IDENTITY();
+
+
+END
